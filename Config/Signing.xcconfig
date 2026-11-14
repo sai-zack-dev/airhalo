@@ -1,0 +1,16 @@
+// Default: sign to run locally (ad-hoc). Works without an Apple ID, but macOS
+// forgets the Accessibility permission after every rebuild.
+//
+// For a stable signature, sign into Xcode with your Apple ID, then create
+// Config/Signing.local.xcconfig (git-ignored) containing:
+//
+//   DEVELOPMENT_TEAM = <your team ID>
+//   CODE_SIGN_IDENTITY = Apple Development
+//
+// `make signing` does this for you.
+
+CODE_SIGN_STYLE = Automatic
+CODE_SIGN_IDENTITY = -
+DEVELOPMENT_TEAM =
+
+#include? "Signing.local.xcconfig"

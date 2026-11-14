@@ -1,0 +1,50 @@
+name: AirHalo
+
+options:
+  bundleIdPrefix: app.airhalo
+  deploymentTarget:
+    macOS: "14.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    MACOSX_DEPLOYMENT_TARGET: "14.0"
+
+packages:
+  AirHaloBrain:
+    path: Packages/AirHaloBrain
+
+targets:
+  AirHalo:
+    type: application
+    platform: macOS
+    sources:
+      - path: AirHalo
+        excludes:
+          - Resources/Info.plist
+    dependencies:
+      - package: AirHaloBrain
+    configFiles:
+      Debug: Config/Signing.xcconfig
+      Release: Config/Signing.xcconfig
+    info:
+      path: AirHalo/Resources/Info.plist
+      properties:
+        CFBundleDisplayName: AirHalo
+        CFBundleShortVersionString: "0.1.0"
+        CFBundleVersion: "1"
+        LSUIElement: true
+        LSApplicationCategoryType: public.app-category.utilities
+        NSCameraUsageDescription: AirHalo uses the camera to track your hand so you can control the pointer. Video is processed on your Mac and never leaves it.
+    entitlements:
+      path: AirHalo/Resources/AirHalo.entitlements
+      properties:
+        com.apple.security.device.camera: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.airhalo.mac
+        PRODUCT_NAME: AirHalo
+        ENABLE_HARDENED_RUNTIME: YES
+        GENERATE_INFOPLIST_FILE: NO
+        SWIFT_STRICT_CONCURRENCY: complete
